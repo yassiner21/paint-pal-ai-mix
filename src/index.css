@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 10% 25%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 220 10% 25%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 10% 25%;
+    
+    --primary: 220 80% 55%;
+    --primary-foreground: 220 10% 95%;
+    
+    --secondary: 220 20% 92%;
+    --secondary-foreground: 220 10% 25%;
+    
+    --muted: 220 20% 92%;
+    --muted-foreground: 220 10% 40%;
+    
+    --accent: 220 30% 90%;
+    --accent-foreground: 220 10% 25%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 220 20% 85%;
+    --input: 220 20% 85%;
+    --ring: 220 80% 55%;
+    
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 220 30% 10%;
+    --foreground: 210 20% 90%;
+    --card: 220 30% 15%;
+    --card-foreground: 210 20% 90%;
+    --popover: 220 30% 15%;
+    --popover-foreground: 210 20% 90%;
+    --primary: 210 80% 55%;
+    --primary-foreground: 210 20% 95%;
+    --secondary: 220 20% 25%;
+    --secondary-foreground: 210 20% 90%;
+    --muted: 220 20% 20%;
+    --muted-foreground: 210 10% 70%;
+    --accent: 220 30% 25%;
+    --accent-foreground: 210 20% 90%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 20% 25%;
+    --input: 220 20% 25%;
+    --ring: 210 80% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .color-swatch {
+    @apply relative rounded-lg shadow-md cursor-pointer transition-transform hover:scale-105;
+    aspect-ratio: 1;
+  }
+  
+  .color-mixer-container {
+    @apply relative bg-card rounded-xl p-4 border border-border shadow-sm;
+  }
+
+  .color-drop {
+    @apply absolute rounded-full;
+    animation: drop 1s ease-in-out forwards;
+    transform-origin: center top;
+  }
+
+  .color-picker-container {
+    @apply border-2 relative overflow-hidden rounded-xl;
+  }
+
+  .image-upload-container {
+    @apply flex flex-col items-center justify-center border-2 border-dashed border-border rounded-xl p-8 transition-colors hover:border-primary/50 hover:bg-muted/50;
+  }
+
+  .glass-effect {
+    @apply bg-background/80 backdrop-blur-sm border border-border shadow-sm;
+  }
+
+  .paint-stroke {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .paint-stroke::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: all 0.5s;
+    animation: paint-stroke 3s infinite;
+  }
+}
+
+@keyframes drop {
+  0% {
+    transform: scale(0.1) translateY(-100px);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.05) translateY(0);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes paint-stroke {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes color-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
